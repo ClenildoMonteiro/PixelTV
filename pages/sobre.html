@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelTV IPTV - Sua TV Sem Limites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Configurações Gerais (Iguais ao anterior) --- */
+        :root {
+            --bg-color: #050510;
+            --card-bg: #101025;
+            --primary: #3b82f6;
+            --accent: #ec4899;
+            --text-light: #ffffff;
+            --text-gray: #a1a1aa;
+            --gradient: linear-gradient(135deg, #ef4444, #eab308, #3b82f6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Header (Igual ao anterior) --- */
+        header {
+            background-color: rgba(5, 5, 16, 0.95);
+            padding: 20px 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #222;
+        }
+        .logo-container img { height: 50px; }
+        nav ul { display: flex; gap: 25px; }
+        nav a { font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--primary); }
+        .btn-cta {
+            background: var(--gradient); padding: 10px 25px; border-radius: 50px;
+            font-weight: bold; color: white; transition: transform 0.2s;
+        }
+        .btn-cta:hover { transform: scale(1.05); }
+
+        /* --- Hero Section (Igual ao anterior) --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; background: radial-gradient(circle at center, #1a1a3d 0%, var(--bg-color) 70%);
+            padding: 0 20px; margin-top: 60px;
+        }
+        .hero h1 {
+            font-size: 3.5rem; margin-bottom: 20px; background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.2rem; color: var(--text-gray); max-width: 600px; margin: 0 auto 30px; }
+
+        /* --- NOVO CSS DO CARROSSSEL --- */
+        .catalog-section {
+            padding: 80px 0; /* Padding lateral zero para o carrossel ir até a borda */
+            text-align: center;
+            overflow: hidden;
+        }
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; padding: 0 10%; }
+        .section-title span { color: var(--primary); }
+
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 20px;
+            padding-left: 5%; /* Um pequeno espaçamento inicial */
+        }
+
+        .banner-item {
+            /* No desktop, mostra 3 itens e meio por vez. Flex-shrink 0 impede que encolham */
+            flex: 0 0 30%; 
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+            aspect-ratio: 16/9; /* Mantém o formato retangular de banner */
+        }
+        
+        .banner-item:hover {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .banner-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem preencha o banner sem distorcer */
+        }
+
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            text-align: left;
+        }
+        .banner-overlay h3 { font-size: 1.2rem; margin-bottom: 5px;}
+        .banner-overlay p { font-size: 0.9rem; color: var(--text-gray);}
+
+        /* --- CSS das Categorias Menores (Abaixo do carrossel) --- */
+        .categories-grid-small {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 50px 10% 0; /* Padding de volta para centralizar */
+        }
+        .small-cat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+        .small-cat-card i { font-size: 1.5rem; color: var(--primary); }
+        .small-cat-card h4 { font-size: 1.1rem; }
+
+
+        /* --- Seção de Preços (Igual ao anterior) --- */
+        .pricing { padding: 80px 10%; background-color: #080816; text-align: center; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .price-card { background: var(--card-bg); padding: 40px; border-radius: 20px; position: relative; border: 1px solid #333; }
+        .price-card.popular { border: 2px solid var(--primary); transform: scale(1.05); z-index: 10; }
+        .badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .price-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .price { font-size: 2.5rem; font-weight: bold; margin-bottom: 20px; }
+        .price span { font-size: 1rem; color: var(--text-gray); font-weight: normal; }
+        .features-list li { margin-bottom: 15px; color: var(--text-gray); }
+        .features-list li i { color: #10b981; margin-right: 10px; }
+        .btn-price { display: block; width: 100%; padding: 15px; border-radius: 10px; background: #333; color: white; margin-top: 30px; font-weight: bold; transition: 0.3s; }
+        .popular .btn-price { background: var(--primary); }
+        .btn-price:hover { filter: brightness(1.2); }
+        footer { padding: 40px 10%; text-align: center; border-top: 1px solid #222; font-size: 0.9rem; color: var(--text-gray); }
+
+        /* --- Responsivo --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav ul { display: none; }
+            .pricing-grid { gap: 60px; }
+            
+            /* Ajuste do carrossel para celular */
+            .banner-item {
+                flex: 0 0 85%; /* Mostra 1 banner quase inteiro no celular */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <h2 style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">PixelTV</h2>
+            </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#catalog">Catálogo</a></li>
+                <li><a href="#pricing">Planos</a></li>
+            </ul>
+        </nav>
+        <a href="#pricing" class="btn-cta">Teste Grátis</a>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>O Futuro da TV chegou na PixelTV</h1>
+            <p>Tenha acesso a milhares de canais, filmes e séries em alta definição.</p>
+            <a href="#pricing" class="btn-cta">Ver Planos Disponíveis</a>
+        </div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+        <h2 class="section-title">Destaques do <span>Mês</span></h2>
+        
+        <div class="carousel-container">
+            <div class="carousel-track" id="autoCarousel">
+                
+                <div class="banner-item">
+                    <img src="https://via.placeholder.com/800x450/3b82f6/ffffff?text=Filme+Ação+Destaque" alt="Filme Destaque 1">
+                    <div class="banner-overlay">
+                        <h3>Missão Explosiva</h3>
+                        <p>Ação • 2024 • 4K HDR</p>
+                    </div>
+                </div>
+
+                <div class="banner-item">
+                    <img src="https://via.placeholder.com/800x450/ec4899/ffffff?text=Série+do+Momento" alt="Série Destaque 2">
+                    <div class="banner-overlay">
+                        <h3>O Império Perdido</h3>
+                        <p>Série • Nova Temporada</p>
+                    </div>
+                </div>
+
+                 <div class="banner-item">
+                    <img src="https://via.placeholder.com/800x450/10b981/ffffff?text=Futebol+Ao+Vivo" alt="Esporte Destaque 3">
+                    <div class="banner-overlay">
+                        <h3>Final do Campeonato</h3>
+                        <p>Esportes • Ao Vivo • FHD</p>
+                    </div>
+                </div>
+
+                <div class="banner-item">
+                    <img src="https://via.placeholder.com/800x450/eab308/ffffff?text=Desenho+Kids" alt="Kids Destaque 4">
+                    <div class="banner-overlay">
+                        <h3>Aventura na Floresta</h3>
+                        <p>Kids • Livre</p>
+                    </div>
+                </div>
+
+                 <div class="banner-item">
+                    <img src="https://via.placeholder.com/800x450/ef4444/ffffff?text=Lançamento+Terror" alt="Filme Destaque 5">
+                    <div class="banner-overlay">
+                        <h3>A Casa da Colina</h3>
+                        <p>Terror • Lançamento</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="categories-grid-small">
+            <div class="small-cat-card">
+                <i class="fas fa-futbol"></i>
+                <div>
+                    <h4>Esportes ao Vivo</h4>
+                </div>
+            </div>
+             <div class="small-cat-card">
+                <i class="fas fa-film"></i>
+                <div>
+                    <h4>Catálogo de Filmes</h4>
+                </div>
+            </div>
+             <div class="small-cat-card">
+                <i class="fas fa-tv"></i>
+                <div>
+                    <h4>Séries Completas</h4>
+                </div>
+            </div>
+             <div class="small-cat-card">
+                <i class="fas fa-child"></i>
+                <div>
+                    <h4>Canais Infantis</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Escolha seu <span>Plano</span></h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Mensal</h3>
+                <div class="price">R$ 29,90<span>/mês</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> +20.000 Conteúdos</li>
+                    <li><i class="fas fa-check"></i> Canais SD, HD e 4K</li>
+                    <li><i class="fas fa-check"></i> 1 Tela Simultânea</li>
+                </ul>
+                <a href="#" class="btn-price">Assinar Agora</a>
+            </div>
+            <div class="price-card popular">
+                <div class="badge">MAIS VENDIDO</div>
+                <h3>Trimestral</h3>
+                <div class="price">R$ 79,90<span>/3 meses</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Tudo do mensal</li>
+                    <li><i class="fas fa-check"></i> Suporte Prioritário</li>
+                    <li><i class="fas fa-check"></i> 1 Tela Simultânea</li>
+                </ul>
+                <a href="#" class="btn-price">Assinar Agora</a>
+            </div>
+            <div class="price-card">
+                <h3>Anual</h3>
+                <div class="price">R$ 199,90<span>/ano</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Tudo do trimestral</li>
+                    <li><i class="fas fa-check"></i> Suporte VIP</li>
+                    <li><i class="fas fa-check"></i> 2 Telas Simultâneas</li>
+                </ul>
+                <a href="#" class="btn-price">Assinar Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>&copy; 2024 PixelTV IPTV. Todos os direitos reservados.</p>
+    </footer>
+
+
+    <script>
+        const track = document.getElementById('autoCarousel');
+        let scrollAmount = 0;
+        let direction = 1; // 1 para frente, -1 para trás
+
+        function

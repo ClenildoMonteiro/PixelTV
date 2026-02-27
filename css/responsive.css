@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+    nav ul { display: none; } /* Isto remove o menu completamente */
+}
+
+/* --- Responsivo --- */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    nav ul { display: none; } /* Simplificação para mobile */
+    .pricing-grid { gap: 60px; }
+}
+
+html {
+    scroll-behavior: smooth;
+}

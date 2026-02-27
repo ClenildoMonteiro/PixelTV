@@ -1,0 +1,214 @@
+    /* --- Configurações Gerais --- */
+        :root {
+            --bg-color: #050510;       /* Fundo muito escuro */
+            --card-bg: #101025;        /* Fundo dos cartões */
+            --primary: #3b82f6;        /* Azul da logo */
+            --accent: #ec4899;         /* Rosa/Roxo da logo */
+            --text-light: #ffffff;
+            --text-gray: #a1a1aa;
+            --gradient: linear-gradient(135deg, #ef4444, #eab308, #3b82f6); /* Cores do cubo */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- Header / Navegação --- */
+        header {
+            background-color: rgba(5, 5, 16, 0.95);
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo-container img {
+            height: 50px; /* Ajuste conforme necessário */
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        .btn-cta {
+            background: var(--gradient);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .btn-cta:hover { transform: scale(1.05); }
+
+        /* --- Hero Section (Banner Principal) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a3d 0%, var(--bg-color) 70%);
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* --- Seção de Categorias (Canais) --- */
+        .categories {
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .section-title span { color: var(--primary); }
+
+        .grid-channels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .channel-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #222;
+            transition: 0.3s;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .channel-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .channel-card h3 { margin-bottom: 10px; }
+        .channel-card p { color: var(--text-gray); font-size: 0.9rem; }
+
+        /* --- Seção de Preços --- */
+        .pricing {
+            padding: 80px 10%;
+            background-color: #080816;
+            text-align: center;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .price-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .price-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .price { font-size: 2.5rem; font-weight: bold; margin-bottom: 20px; }
+        .price span { font-size: 1rem; color: var(--text-gray); font-weight: normal; }
+
+        .features-list li {
+            margin-bottom: 15px;
+            color: var(--text-gray);
+        }
+        
+        .features-list li i { color: #10b981; margin-right: 10px; }
+
+        .btn-price {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background: #333;
+            color: white;
+            margin-top: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .popular .btn-price { background: var(--primary); }
+        .btn-price:hover { filter: brightness(1.2); }
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 1px solid #222;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        
